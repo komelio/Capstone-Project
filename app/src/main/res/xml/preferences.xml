@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aagamshah="http://aagamshah.com">
+    <PreferenceCategory android:title="Display">
+        <CheckBoxPreference
+            android:contentDescription="Mirror the text"
+            android:defaultValue="true"
+            android:key="pref_mirror"
+            android:summary="Mirror the text"
+            android:title="Mirror" />
+        <com.geek.aagamshah.capstone_project.SeekBarPreference
+            android:defaultValue="24"
+            android:dialogMessage=""
+            android:key="pref_fontsize"
+            android:max="128"
+            android:summary="Set the fontsize"
+            android:text=""
+            android:title="Fontsize"
+            aagamshah:min="8"
+            aagamshah:showSize="true" />
+        <ListPreference
+            android:defaultValue="Roboto"
+            android:entries="@array/font"
+            android:entryValues="@array/font"
+            android:key="pref_font"
+            android:summary="Select a font"
+            android:title="Font" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Scrolling">
+        <CheckBoxPreference
+            android:contentDescription="Auto-Start"
+            android:defaultValue="true"
+            android:key="pref_autostart"
+            android:summary="Text starts scrolling automatically after given amount of time"
+            android:title="Auto-Start" />
+        <com.geek.aagamshah.capstone_project.SeekBarPreference
+            android:defaultValue="2"
+            android:dependency="pref_autostart"
+            android:dialogMessage=""
+            android:key="pref_startdelay"
+            android:max="10"
+            aagamshah:min="1"
+            android:summary="Amount of time to pass before the scrolling starts"
+            android:text=" seconds"
+            android:title="Delay" />
+        <CheckBoxPreference
+            android:contentDescription="Shows a countdown before scrolling begins"
+            android:defaultValue="true"
+            android:dependency="pref_autostart"
+            android:key="pref_showCountdown"
+            android:summary="Shows a countdown before scrolling begins"
+            android:title="Countdown" />
+        <com.geek.aagamshah.capstone_project.SeekBarPreference
+            android:defaultValue="49"
+            android:dialogMessage=""
+            android:key="pref_speed"
+            android:max="100"
+            android:summary="Select a scrollspeed between 1 (slow) and 100 (fast)"
+            android:text=""
+            android:title="Scrollspeed"
+            aagamshah:hasPreview="true"
+            aagamshah:justStart="true"
+            aagamshah:min="1" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Colours">
+        <ListPreference
+            android:defaultValue="#000000"
+            android:entries="@array/colours"
+            android:entryValues="@array/colours_values"
+            android:key="pref_bgcolour"
+            android:summary="Select a backgroundcolour"
+            android:title="Backgroundcolour" />
+        <ListPreference
+            android:defaultValue="#FFFFFF"
+            android:entries="@array/colours"
+            android:entryValues="@array/colours_values"
+            android:key="pref_txtcolour"
+            android:summary="Select a textcolour"
+            android:title="Textcolour" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Preview">
+        <Preference
+            android:key="pref_test"
+            android:summary="Test the current settings with a blind text"
+            android:title="Test" />
+    </PreferenceCategory>
+</PreferenceScreen>
