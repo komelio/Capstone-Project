@@ -32,9 +32,6 @@ import butterknife.ButterKnife;
 public class TypeActivity extends AppCompatActivity {
     public static final String EXTRA_JUSTSTART = "com.geek.aagamshah.capstone_project.JUSTSTART";
     public static final String EXTRA_TELETEXT = "com.geek.aagamshah.capstone_project.TELETEXT";
-    private String documentTitle;
-    private Tracker mTracker;
-    private boolean isnew = false;
     @BindView(R.id.teletext)
     EditText mTeletext;
     @BindView(R.id.teletext_title)
@@ -43,6 +40,9 @@ public class TypeActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.nested_scroll_view)
     NestedScrollView nestedScrollView;
+    private String documentTitle;
+    private Tracker mTracker;
+    private boolean isnew = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class TypeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mTracker.setScreenName("TypeActivity");
+        mTracker.setScreenName(getResources().getString(R.string.type_activity));
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         mTracker.send(new HitBuilders.EventBuilder()
                 .setCategory("Action")
@@ -137,22 +137,22 @@ public class TypeActivity extends AppCompatActivity {
         switch (id) {
             case 1:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Are you sure you want to delete this document?");
+                builder.setMessage(getResources().getString(R.string.dialog_message));
                 builder.setCancelable(true);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(getResources().getString(R.string.delete), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         new File(getFilesDir(), documentTitle).delete();
                         getContentResolver().delete(MyContentProvider.Contracts.fileInfo.CONTENT_URI,
                                 MyContentProvider.Contracts.fileInfo.FILE_NAME + " = ?", new String[]{documentTitle});
-                        Toast.makeText(getApplicationContext(), "Document deleted!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getBaseContext(),MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
                     }
                 });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

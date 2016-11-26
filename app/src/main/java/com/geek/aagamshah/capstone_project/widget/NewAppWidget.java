@@ -16,18 +16,18 @@ import com.geek.aagamshah.capstone_project.activity.MainActivity;
  */
 public class NewAppWidget extends AppWidgetProvider {
 
-    static String LAUNCH_ACTION="com.geek.aagamshah.capstone_project.widget.LAUNCH";
+    static String LAUNCH_ACTION = "com.geek.aagamshah.capstone_project.widget.LAUNCH";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        Intent intent=new Intent(context, MyService.class);
+        Intent intent = new Intent(context, MyService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-        RemoteViews rm=new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
+        RemoteViews rm = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
         rm.setRemoteAdapter(R.id.widget_list, intent);
-        rm.setEmptyView(R.id.widget_list,R.id.empty_view3);
-        Intent intent1=new Intent(context, NewAppWidget.class);
+        rm.setEmptyView(R.id.widget_list, R.id.empty_view3);
+        Intent intent1 = new Intent(context, NewAppWidget.class);
         intent1.setAction(LAUNCH_ACTION);
         intent1.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent1.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
@@ -57,8 +57,8 @@ public class NewAppWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if(intent.getAction().equals(LAUNCH_ACTION)){
-            Intent intent1=new Intent(context, MainActivity.class);
+        if (intent.getAction().equals(LAUNCH_ACTION)) {
+            Intent intent1 = new Intent(context, MainActivity.class);
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent1);
         }

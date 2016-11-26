@@ -19,6 +19,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TeleprompterActivity extends AppCompatActivity {
+    @BindView(R.id.text_teleprompter)
+    MirroredTextView mirroredTextView;
+    @BindView(R.id.scrollview_teleprompter)
+    ScrollView scrollView;
     private Runnable count;
     private int countdown;
     private Handler customHandler;
@@ -32,21 +36,15 @@ public class TeleprompterActivity extends AppCompatActivity {
     private int timer;
     private Toast toast;
 
-    @BindView(R.id.text_teleprompter)
-    MirroredTextView mirroredTextView;
-    @BindView(R.id.scrollview_teleprompter)
-    ScrollView scrollView;
-
     public TeleprompterActivity() {
         scroll = new Runnable() {
             @Override
             public void run() {
-                if(scrollText){
-                    if(timer > 0){
+                if (scrollText) {
+                    if (timer > 0) {
                         timer = timer - 1;
-                    }
-                    else{
-                        scrollView.scrollTo(0,scrollView.getScrollY() + 1);
+                    } else {
+                        scrollView.scrollTo(0, scrollView.getScrollY() + 1);
                         timer = time;
                     }
                     customHandler.post(scroll);
@@ -97,12 +95,12 @@ public class TeleprompterActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String message = intent.getStringExtra(TypeActivity.EXTRA_TELETEXT);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        scrollSpeed = 102 - (prefs.getInt("pref_speed", 50)  + getResources().getInteger(R.integer.min_scrollspeed));
+        scrollSpeed = 102 - (prefs.getInt("pref_speed", 50) + getResources().getInteger(R.integer.min_scrollspeed));
         MirroredTextView.mirror = prefs.getBoolean("pref_mirror", true);
         mirroredTextView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/" + prefs.getString("pref_font", "Roboto") + ".ttf"), 1);
         mirroredTextView.setTextSize((float) (prefs.getInt("pref_fontsize", 24) + getResources().getInteger(R.integer.min_fontsize)));
         mirroredTextView.setText(message);
-        mirroredTextView.setTextColor(Color.parseColor(prefs.getString("pref_txtcolour","#FFFFFF")));
+        mirroredTextView.setTextColor(Color.parseColor(prefs.getString("pref_txtcolour", "#FFFFFF")));
         mirroredTextView.setBackgroundColor(Color.parseColor(prefs.getString("pref_bgcolour", "#000000")));
         time = this.scrollSpeed * 100;
         scrollText = false;
@@ -121,11 +119,10 @@ public class TeleprompterActivity extends AppCompatActivity {
             scrollText = true;
             timer = this.time;
             customHandler.postDelayed(this.scroll, 500);
-        }
-        else if(prefs.getBoolean("pref_autostart",false)){
+        } else if (prefs.getBoolean("pref_autostart", false)) {
             delayDone = false;
-            countdown = prefs.getInt("pref_startdelay",2)+1;
-            showCountdown = prefs.getBoolean("pref_showCountdown",false);
+            countdown = prefs.getInt("pref_startdelay", 2) + 1;
+            showCountdown = prefs.getBoolean("pref_showCountdown", false);
             customHandler.post(count);
         }
     }
@@ -148,10 +145,10 @@ public class TeleprompterActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(toast != null){
+        if (toast != null) {
             toast.cancel();
         }
-        if(customHandler != null){
+        if (customHandler != null) {
             customHandler.removeCallbacksAndMessages(null);
         }
         scrollText = false;

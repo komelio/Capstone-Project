@@ -16,16 +16,17 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 public class MyContentProvider extends ContentProvider {
-    MySqlHelper mySqlHelper;
-    public static UriMatcher uriMatcher;
     public static final int FILEINFOS = 1;
     public static final int FILEINFO = 2;
+    public static UriMatcher uriMatcher;
 
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(Contracts.AUTHORITY, Contracts.fileInfo.TABLE_NAME, FILEINFOS);
         uriMatcher.addURI(Contracts.AUTHORITY, Contracts.fileInfo.TABLE_NAME + "/#", FILEINFO);
     }
+
+    MySqlHelper mySqlHelper;
 
     @Override
     public boolean onCreate() {

@@ -41,61 +41,48 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         super(context, attrs);
         mValue = 0;
         mContext = context;
-        mDialogMessage = attrs.getAttributeValue(androidns,"dialogMessage");
-        mSuffix =attrs.getAttributeValue(androidns,"text");
-        mDefault = attrs.getAttributeIntValue(androidns,"defaultValue",0);
-        mMin = attrs.getAttributeIntValue(aagamshah,"min",0);
-        mMax = attrs.getAttributeIntValue(androidns,"max",100) - mMin;
-        if(attrs.getAttributeBooleanValue(aagamshah,"showSize",false)){
-            showSize = true;
-        }
-        else{
-            showSize = false;
-        }
-        if (attrs.getAttributeBooleanValue(aagamshah, "hasPreview", false)) {
-            showPreview = true;
-        } else {
-            showPreview = false;
-        }
-        if (attrs.getAttributeBooleanValue(aagamshah, "justStart", false)) {
-            justStart = true;
-        } else {
-            justStart = false;
-        }
+        mDialogMessage = attrs.getAttributeValue(androidns, "dialogMessage");
+        mSuffix = attrs.getAttributeValue(androidns, "text");
+        mDefault = attrs.getAttributeIntValue(androidns, "defaultValue", 0);
+        mMin = attrs.getAttributeIntValue(aagamshah, "min", 0);
+        mMax = attrs.getAttributeIntValue(androidns, "max", 100) - mMin;
+        showSize = attrs.getAttributeBooleanValue(aagamshah, "showSize", false);
+        showPreview = attrs.getAttributeBooleanValue(aagamshah, "hasPreview", false);
+        justStart = attrs.getAttributeBooleanValue(aagamshah, "justStart", false);
     }
 
     @Override
     protected View onCreateDialogView() {
         LinearLayout layout = new LinearLayout(mContext);
         layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(6,6,6,6);
+        layout.setPadding(6, 6, 6, 6);
         mSplashText = new TextView(mContext);
-        if(mDialogMessage != null){
+        if (mDialogMessage != null) {
             mSplashText.setText(mDialogMessage);
         }
         layout.addView(mSplashText);
         mValueText = new TextView(mContext);
         mValueText.setGravity(View.TEXT_ALIGNMENT_CENTER);
         mValueText.setTextSize(32.0f);
-        layout.addView(mValueText,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        layout.addView(mValueText, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mSeekBar = new SeekBar(mContext);
         mSeekBar.setOnSeekBarChangeListener(this);
-        layout.addView(mSeekBar,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        if(shouldPersist()){
+        layout.addView(mSeekBar, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        if (shouldPersist()) {
             mValue = getPersistedInt(mDefault);
         }
         mSeekBar.setMax(mMax);
         mSeekBar.setProgress(mValue);
-        if(showPreview){
+        if (showPreview) {
             previewButton = new Button(getContext());
             previewButton.setText(R.string.button_preview);
             //TODO: Add OnClick Listener
             previewButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(),TeleprompterActivity.class);
-                    intent.putExtra(TypeActivity.EXTRA_JUSTSTART,justStart);
-                    intent.putExtra(TypeActivity.EXTRA_TELETEXT,getContext().getString(R.string.blind_text));
+                    Intent intent = new Intent(getContext(), TeleprompterActivity.class);
+                    intent.putExtra(TypeActivity.EXTRA_JUSTSTART, justStart);
+                    intent.putExtra(TypeActivity.EXTRA_TELETEXT, getContext().getString(R.string.blind_text));
                     getContext().startActivity(intent);
                 }
             });
@@ -114,27 +101,26 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
     @Override
     protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
         super.onSetInitialValue(restorePersistedValue, defaultValue);
-        if(restorePersistedValue){
+        if (restorePersistedValue) {
             mValue = shouldPersist() ? getPersistedInt(mDefault) : 0;
-        }
-        else{
-            mValue = ((Integer)defaultValue).intValue();
+        } else {
+            mValue = ((Integer) defaultValue).intValue();
         }
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        String t = String.valueOf(mMin+progress);
+        String t = String.valueOf(mMin + progress);
         TextView textView = mValueText;
         if (mSuffix != null) {
             t = t.concat(mSuffix);
         }
         textView.setText(t);
-        if(shouldPersist()){
+        if (shouldPersist()) {
             persistInt(progress);
         }
         callChangeListener(new Integer(progress));
-        if(showSize){
+        if (showSize) {
             mValueText.setTextSize((float) (mMin + progress));
         }
     }
@@ -149,21 +135,4 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
 
     }
 
-    public void setMax(int mMax) {
-        this.mMax = mMax;
-    }
-
-    public int getMax() {
-        return mMax;
-    }
-
-    public void setProgress(int progress){
-        if(mSeekBar != null){
-            mSeekBar.setProgress(progress);
-        }
-    }
-
-    public int getProgress(){
-        return mValue + mMin;
-    }
 }

@@ -16,7 +16,6 @@ package com.geek.aagamshah.capstone_project;
  */
 
 
-
 import android.app.Application;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -31,6 +30,7 @@ public class AnalyticsApplication extends Application {
 
     /**
      * Gets the default {@link Tracker} for this {@link Application}.
+     *
      * @return tracker
      */
     synchronized public Tracker getDefaultTracker() {

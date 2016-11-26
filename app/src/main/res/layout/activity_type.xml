@@ -40,10 +40,10 @@
                 android:hint="@string/teletext_title_hint">
 
                 <EditText
-                    android:contentDescription="@string/teletext_title_hint"
                     android:id="@+id/teletext_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/teletext_title_hint"
                     android:imeOptions="actionGo"
                     android:inputType="text"
                     android:maxLines="1" />
@@ -58,18 +58,18 @@
                 android:hint="@string/teletext_hint" />
 
             <Button
-                android:contentDescription="@string/button_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/button_start"
-                android:onClick="startPrompter"/>
+                android:contentDescription="@string/button_start"
+                android:onClick="startPrompter"
+                android:text="@string/button_start" />
 
             <Button
-                android:contentDescription="@string/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/delete"
-                android:onClick="deleteDocument"/>
+                android:contentDescription="@string/delete"
+                android:onClick="deleteDocument"
+                android:text="@string/delete" />
 
         </LinearLayout>
 

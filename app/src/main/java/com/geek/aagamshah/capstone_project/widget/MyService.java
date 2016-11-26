@@ -31,7 +31,7 @@ public class MyService extends RemoteViewsService {
 
         @Override
         public void onCreate() {
-            cursor=context.getContentResolver().query(
+            cursor = context.getContentResolver().query(
                     MyContentProvider.Contracts.fileInfo.CONTENT_URI,
                     new String[]{MyContentProvider.Contracts.fileInfo.FILE_NAME, MyContentProvider.Contracts.fileInfo.FILE_PATH},
                     null, null, null
@@ -57,7 +57,7 @@ public class MyService extends RemoteViewsService {
         public RemoteViews getViewAt(int i) {
             cursor.moveToPosition(i);
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.list_item);
-            remoteViews.setTextColor(R.id.file_name,getResources().getColor(R.color.material_light_black));
+            remoteViews.setTextColor(R.id.file_name, getResources().getColor(R.color.material_light_black));
             remoteViews.setTextViewText(R.id.file_name, cursor.getString(cursor.getColumnIndex(MyContentProvider.Contracts.fileInfo.FILE_NAME)));
             Intent intent = new Intent();
             intent.putExtra("content_add", cursor.getString(cursor.getColumnIndex(MyContentProvider.Contracts.fileInfo.FILE_PATH)));

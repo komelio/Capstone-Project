@@ -11,14 +11,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MySqlHelper extends SQLiteOpenHelper {
     private static MySqlHelper mySqlHelper;
 
+    private MySqlHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
+
     public static synchronized MySqlHelper getInstance(Context context, String name, SQLiteDatabase.CursorFactory cursorFactory, int version) {
         if (mySqlHelper == null)
             mySqlHelper = new MySqlHelper(context, name, cursorFactory, version);
         return mySqlHelper;
-    }
-
-    private MySqlHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
     }
 
     @Override

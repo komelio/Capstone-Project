@@ -35,17 +35,16 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
     public static final String EXTRA_DOCUMENT = "com.geek.aagamshah.capstone_project.IMPORTED";
     public static final String EXTRA_DOCUMENT_TITLE = "com.geek.aagamshah.capstone_project.IMPORTED_TITLE";
-    private String importedText = BuildConfig.FLAVOR;
-    private String importedTitle = BuildConfig.FLAVOR;
-    private InterstitialAd mInterstitialAd;
-    private SimpleCursorAdapter simpleCursorAdapter;
     @BindView(R.id.toolbar_main)
     Toolbar mToolbar;
     @BindView(R.id.document_list)
     ListView mListView;
     @BindView(R.id.empty_state_container)
     LinearLayout emptyLayout;
-
+    private String importedText = BuildConfig.FLAVOR;
+    private String importedTitle = BuildConfig.FLAVOR;
+    private InterstitialAd mInterstitialAd;
+    private SimpleCursorAdapter simpleCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void newDocument(View view) {
-        if(mInterstitialAd.isLoaded()){
+        if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
         Intent intent = new Intent(this, TypeActivity.class);
@@ -157,8 +156,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void updateEmptyView() {
         if (simpleCursorAdapter.getCount() == 0) {
             emptyLayout.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             emptyLayout.setVisibility(View.INVISIBLE);
         }
     }

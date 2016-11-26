@@ -26,8 +26,8 @@ public class SettingsFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         Preference preference = findPreference("pref_test");
-        Intent intent = new Intent(getActivity(),TeleprompterActivity.class);
-        intent.putExtra(TypeActivity.EXTRA_TELETEXT,getString(R.string.blind_text));
+        Intent intent = new Intent(getActivity(), TeleprompterActivity.class);
+        intent.putExtra(TypeActivity.EXTRA_TELETEXT, getString(R.string.blind_text));
         preference.setIntent(intent);
     }
 }

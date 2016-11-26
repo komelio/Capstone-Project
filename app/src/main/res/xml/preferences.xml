@@ -39,10 +39,10 @@
             android:dialogMessage=""
             android:key="pref_startdelay"
             android:max="10"
-            aagamshah:min="1"
             android:summary="Amount of time to pass before the scrolling starts"
             android:text=" seconds"
-            android:title="Delay" />
+            android:title="Delay"
+            aagamshah:min="1" />
         <CheckBoxPreference
             android:contentDescription="Shows a countdown before scrolling begins"
             android:defaultValue="true"
