@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aagamshah="http://aagamshah.com">
-    <PreferenceCategory android:title="Display">
+    <PreferenceCategory android:title="@string/display">
         <CheckBoxPreference
-            android:contentDescription="Mirror the text"
+            android:contentDescription="@string/mirror_content"
             android:defaultValue="true"
             android:key="pref_mirror"
-            android:summary="Mirror the text"
-            android:title="Mirror" />
+            android:summary="@string/mirror_content"
+            android:title="@string/mirror_title" />
         <com.geek.aagamshah.capstone_project.SeekBarPreference
             android:defaultValue="24"
             android:dialogMessage=""
             android:key="pref_fontsize"
             android:max="128"
-            android:summary="Set the fontsize"
+            android:summary="@string/font_summary"
             android:text=""
-            android:title="Fontsize"
+            android:title="@string/font_title"
             aagamshah:min="8"
             aagamshah:showSize="true" />
         <ListPreference
@@ -23,65 +23,66 @@
             android:entries="@array/font"
             android:entryValues="@array/font"
             android:key="pref_font"
-            android:summary="Select a font"
-            android:title="Font" />
+            android:summary="@string/font_select"
+            android:title="@string/font" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Scrolling">
+    <PreferenceCategory android:title="@string/scrolling">
         <CheckBoxPreference
-            android:contentDescription="Auto-Start"
+            android:contentDescription="@string/auto_title"
             android:defaultValue="true"
             android:key="pref_autostart"
-            android:summary="Text starts scrolling automatically after given amount of time"
-            android:title="Auto-Start" />
+            android:summary="@string/auto_summary"
+            android:title="@string/auto_title" />
         <com.geek.aagamshah.capstone_project.SeekBarPreference
             android:defaultValue="2"
             android:dependency="pref_autostart"
             android:dialogMessage=""
             android:key="pref_startdelay"
             android:max="10"
-            android:summary="Amount of time to pass before the scrolling starts"
-            android:text=" seconds"
-            android:title="Delay"
+            android:summary="@string/delay_summary"
+            android:text="@string/delay_text"
+            android:title="@string/delay"
             aagamshah:min="1" />
         <CheckBoxPreference
-            android:contentDescription="Shows a countdown before scrolling begins"
+            android:contentDescription="@string/countdown_summary"
             android:defaultValue="true"
             android:dependency="pref_autostart"
             android:key="pref_showCountdown"
-            android:summary="Shows a countdown before scrolling begins"
-            android:title="Countdown" />
+            android:summary="@string/countdown_summary"
+            android:title="@string/countdown" />
         <com.geek.aagamshah.capstone_project.SeekBarPreference
             android:defaultValue="49"
             android:dialogMessage=""
             android:key="pref_speed"
             android:max="100"
-            android:summary="Select a scrollspeed between 1 (slow) and 100 (fast)"
+            android:summary="@string/scroll_speed_summary"
             android:text=""
-            android:title="Scrollspeed"
+            android:title="@string/scroll_speed"
             aagamshah:hasPreview="true"
             aagamshah:justStart="true"
             aagamshah:min="1" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Colours">
+    <PreferenceCategory android:title="@string/colours">
         <ListPreference
             android:defaultValue="#000000"
             android:entries="@array/colours"
             android:entryValues="@array/colours_values"
             android:key="pref_bgcolour"
-            android:summary="Select a backgroundcolour"
-            android:title="Backgroundcolour" />
+            android:summary="@string/background_colour_summary"
+            android:title="@string/background_colour" />
         <ListPreference
             android:defaultValue="#FFFFFF"
             android:entries="@array/colours"
             android:entryValues="@array/colours_values"
             android:key="pref_txtcolour"
-            android:summary="Select a textcolour"
-            android:title="Textcolour" />
+            android:summary="@string/text_colour_summary"
+            android:title="@string/text_colour" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Preview">
+    <PreferenceCategory android:title="@string/button_preview">
         <Preference
             android:key="pref_test"
-            android:summary="Test the current settings with a blind text"
-            android:title="Test" />
+            android:summary="@string/test_summary"
+            android:title="@string/test" />
+
     </PreferenceCategory>
 </PreferenceScreen>
